@@ -15,6 +15,7 @@ namespace Capstone.Classes
     {
         private Catering catering = new Catering();
 
+
         public void RunInterface()
         {
             bool done = false;
@@ -28,6 +29,20 @@ namespace Capstone.Classes
                 Console.WriteLine("(3) Quit");
                 menuSelection = MenuSelection();
 
+                switch (menuSelection)
+                {
+                    case 1:
+                        //logic for displaying catering items
+                        break;
+                    case 2:
+                        // logic for oplacing an order
+                        OrderInterface();
+                        break;
+                    case 3:
+                        //set escape condition to true
+                        done = true;
+                        break;
+                }
             }
         }
 
@@ -41,13 +56,13 @@ namespace Capstone.Classes
         {
             int menuSelection = -1;
             bool validInput = false;
-
-            while(!validInput)
+            
+            while (!validInput)
             {
                 try
                 {
                     menuSelection = int.Parse(Console.ReadLine());
-                    if(menuSelection > 0 && menuSelection < 4)
+                    if (menuSelection > 0 && menuSelection < 4)
                     {
                         validInput = true;
                     }
@@ -56,7 +71,7 @@ namespace Capstone.Classes
                         Console.WriteLine("Please enter a number from 1 to 3");
                     }
                 }
-                catch(FormatException ex)
+                catch (FormatException ex)
                 {
                     Console.WriteLine("Invalid input, try again");
                 }
@@ -64,5 +79,39 @@ namespace Capstone.Classes
 
             return menuSelection;
         }
+
+        public void OrderInterface()
+        {
+            bool done = false;
+            int menuSelection = -1;
+
+            while (!done)
+            {
+                Console.WriteLine("(1) Add Money");
+                Console.WriteLine("(2) Select Products");
+                Console.WriteLine("(3) Complete Transaction");
+                //will display balance RETURN TO THIS
+                Console.WriteLine("Current Account Balance : ");
+
+                menuSelection = MenuSelection();
+                switch (menuSelection)
+                {
+                    case 1:
+                        //logic to add money
+                        break;
+                    case 2:
+                        //logic to select products
+                        break;
+                    case 3:
+                        //set escape condition to true
+                        done = true;
+                        break;
+                }
+
+
+            }
+        }
+
+
     }
 }
