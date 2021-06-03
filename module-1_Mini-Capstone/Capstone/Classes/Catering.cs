@@ -20,6 +20,11 @@ namespace Capstone.Classes
             items.Add(toAdd);
         }
 
+        public List<CateringItem> getItems()
+        {
+            return items;
+        }
+
    
     }
 }
