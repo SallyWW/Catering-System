@@ -6,7 +6,7 @@ namespace Capstone.Classes
 {
     public class Customer
     {
-        public double CurrentAccountBalance { get; private set; }
+        public double CurrentAccountBalance { get; private set; } = 0;
         public string Name { get; }
 
 

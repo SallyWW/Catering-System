@@ -17,5 +17,18 @@ namespace CapstoneTests
             // Assert
             Assert.IsNotNull(catering);
         }
+
+        [TestMethod]
+        public void CateringListShouldBeEmptyWhenCreated()
+        {
+            //Arrange
+            Catering subject = new Catering();
+
+            //Act
+            int result = subject.getItems().Count;
+
+            //Assert
+            Assert.AreEqual(0, result);
+        }
     }
 }

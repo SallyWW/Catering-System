@@ -27,5 +27,16 @@ namespace Capstone.Classes
             return items;
         }
    
+        public bool ItemExists(string userCode)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].Code == userCode)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

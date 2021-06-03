@@ -63,7 +63,7 @@ namespace Capstone.Classes
         /// returns Menu input as an int from 1-3
         /// </summary>
         /// <returns></returns>
-        public int MenuSelection()
+        private int MenuSelection()
         {
             int menuSelection = -1;
             bool validInput = false;
@@ -91,7 +91,7 @@ namespace Capstone.Classes
             return menuSelection;
         }
 
-        public void OrderInterface(Customer customer)
+        private void OrderInterface(Customer customer)
         {
             bool done = false;
             int menuSelection = -1;
@@ -113,6 +113,7 @@ namespace Capstone.Classes
                         break;
                     case 2:
                         //logic to select products
+                        ProductSelection(customer);
                         break;
                     case 3:
                         //set escape condition to true
@@ -129,7 +130,7 @@ namespace Capstone.Classes
         /// </summary>
         /// <param name="input"></param>
 
-        public void DisplayItems(List<CateringItem> input)
+        private void DisplayItems(List<CateringItem> input)
         {
             for (int i = 0; i < input.Count; i++)
             {
@@ -142,7 +143,7 @@ namespace Capstone.Classes
         /// 
         /// </summary>
         /// <param name="input"></param>
-        public void AddToBalance(Customer input)
+        private void AddToBalance(Customer input)
         {
             int toAdd = 0;
             bool validInput = false;
@@ -158,7 +159,7 @@ namespace Capstone.Classes
                     {
                         throw new IndexOutOfRangeException("toAdd");
                     }
-                    if(input.CurrentAccountBalance + toAdd > 5000)
+                    if (input.CurrentAccountBalance + toAdd > 5000)
                     {
                         throw new IndexOutOfRangeException("toAdd");
                     }
@@ -168,7 +169,7 @@ namespace Capstone.Classes
                 {
                     Console.WriteLine("Invalid input. Please enter a whole dollar amount.");
                 }
-                catch(IndexOutOfRangeException ex)
+                catch (IndexOutOfRangeException ex)
                 {
                     Console.WriteLine("Total balance cannot be less than 0 or greater than 5000.");
                 }
@@ -178,5 +179,23 @@ namespace Capstone.Classes
 
         }
 
+        private void ProductSelection(Customer customer)
+        {
+            string userInput = "";
+            bool isFound = false;
+
+            while (!isFound)
+            {
+                Console.WriteLine("Please enter a product code for purchase: ");
+                userInput = Console.ReadLine().ToUpper();
+
+                isFound = catering.ItemExists(userInput);
+
+                if (isFound == false)
+                {
+                    Console.WriteLine("Item does not exist.");
+                }
+            }
+        }
     }
 }

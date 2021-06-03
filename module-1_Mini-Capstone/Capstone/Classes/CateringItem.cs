@@ -24,6 +24,7 @@ namespace Capstone.Classes
             this.Price = price;
             this.Type = type;
         }
+
         public override string ToString()
         {
             string isSoldOut = "";
