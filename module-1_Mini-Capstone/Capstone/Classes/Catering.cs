@@ -16,6 +16,7 @@ namespace Capstone.Classes
         
         public void addCateringItem(CateringItem toAdd)
         {
+
             items.Add(toAdd);
         }
 
