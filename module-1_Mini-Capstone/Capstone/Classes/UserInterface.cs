@@ -18,13 +18,51 @@ namespace Capstone.Classes
         public void RunInterface()
         {
             bool done = false;
+            int menuSelection = -1;
 
             while (!done)
             {
-                Console.WriteLine("Put details of your user interface here");
+                Console.WriteLine("Welcome to Catering Vendor, Weyland Corporation!");
+                Console.WriteLine("(1) Display Catering Items");
+                Console.WriteLine("(2) Order");
+                Console.WriteLine("(3) Quit");
+                menuSelection = MenuSelection();
 
-                Console.ReadLine();
             }
+        }
+
+
+        /// <summary>
+        /// Logic to check user input for a valid menu selection
+        /// returns Menu input as an int from 1-3
+        /// </summary>
+        /// <returns></returns>
+        public int MenuSelection()
+        {
+            int menuSelection = -1;
+            bool validInput = false;
+
+            while(!validInput)
+            {
+                try
+                {
+                    menuSelection = int.Parse(Console.ReadLine());
+                    if(menuSelection > 0 && menuSelection < 4)
+                    {
+                        validInput = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please enter a number from 1 to 3");
+                    }
+                }
+                catch(FormatException ex)
+                {
+                    Console.WriteLine("Invalid input, try again");
+                }
+            }
+
+            return menuSelection;
         }
     }
 }
