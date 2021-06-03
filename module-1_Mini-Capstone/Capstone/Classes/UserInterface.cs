@@ -14,6 +14,7 @@ namespace Capstone.Classes
     public class UserInterface
     {
         private Catering catering = new Catering();
+        private FileAccess menuInitialization = new FileAccess();
 
 
         public void RunInterface()
@@ -21,6 +22,7 @@ namespace Capstone.Classes
             bool done = false;
             int menuSelection = -1;
 
+            menuInitialization.ReadInMenuFile();
             while (!done)
             {
                 Console.WriteLine("Welcome to Catering Vendor, Weyland Corporation!");

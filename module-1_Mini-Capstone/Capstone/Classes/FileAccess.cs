@@ -18,6 +18,8 @@ namespace Capstone.Classes
         // All external data files for this application should live in this directory.
         // You will likely need to create this directory and copy / paste any needed files.
         private string filePath = @"C:\Catering";
+        private string fileName = "cateringsystem.csv";
+        // private Directory fullFile = 
 
 
        public void ReadInMenuFile()
