@@ -14,6 +14,10 @@ namespace Capstone.Classes
     {
         private List<CateringItem> items = new List<CateringItem>();
         
+        public void addCateringItem(CateringItem toAdd)
+        {
+            items.Add(toAdd);
+        }
 
    
     }
