@@ -26,6 +26,7 @@ namespace Capstone.Classes
         }
         public override string ToString()
         {
+            string isSoldOut = "";
             string fullType = "";
             if (Type == "B")
             {
@@ -43,7 +44,16 @@ namespace Capstone.Classes
             {
                 fullType = "dessert";
             }
-            return fullType + "\t" + Name + "\t" + Price + "\t" + inventory;
+
+            if(inventory == 0)
+            {
+                isSoldOut = "SOLD OUT";
+            }
+            else
+            {
+                isSoldOut = inventory.ToString();
+            }
+            return fullType + "\t" + Name + "\t" + Price + "\t" + isSoldOut;
         }
     }
 }
