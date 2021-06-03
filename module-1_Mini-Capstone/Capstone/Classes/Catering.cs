@@ -13,6 +13,8 @@ namespace Capstone.Classes
     public class Catering
     {
         private List<CateringItem> items = new List<CateringItem>();
+        private List<Customer> customers = new List<Customer>();
+
         
         public void addCateringItem(CateringItem toAdd)
         {
@@ -24,7 +26,6 @@ namespace Capstone.Classes
         {
             return items;
         }
-
    
     }
 }

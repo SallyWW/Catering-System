@@ -16,7 +16,9 @@ namespace Capstone.Classes
         private Catering catering = new Catering();
         private FileAccess menuInitialization = new FileAccess();
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void RunInterface()
         {
             bool done = false;
@@ -24,8 +26,13 @@ namespace Capstone.Classes
 
             menuInitialization.ReadInMenuFile();
             catering = menuInitialization.getCatering();
+
+            Customer customer = new Customer("Bob");
+
             while (!done)
             {
+
+
                 Console.WriteLine("Welcome to Catering Vendor, Weyland Corporation!");
                 Console.WriteLine("(1) Display Catering Items");
                 Console.WriteLine("(2) Order");
@@ -40,7 +47,7 @@ namespace Capstone.Classes
                         break;
                     case 2:
                         // logic for oplacing an order
-                        OrderInterface();
+                        OrderInterface(customer);
                         break;
                     case 3:
                         //set escape condition to true
@@ -60,7 +67,7 @@ namespace Capstone.Classes
         {
             int menuSelection = -1;
             bool validInput = false;
-            
+
             while (!validInput)
             {
                 try
@@ -84,7 +91,7 @@ namespace Capstone.Classes
             return menuSelection;
         }
 
-        public void OrderInterface()
+        public void OrderInterface(Customer customer)
         {
             bool done = false;
             int menuSelection = -1;
@@ -95,13 +102,14 @@ namespace Capstone.Classes
                 Console.WriteLine("(2) Select Products");
                 Console.WriteLine("(3) Complete Transaction");
                 //will display balance RETURN TO THIS
-                Console.WriteLine("Current Account Balance : ");
+                Console.WriteLine("Current Account Balance : " + customer.CurrentAccountBalance);
 
                 menuSelection = MenuSelection();
                 switch (menuSelection)
                 {
                     case 1:
                         //logic to add money
+                        AddToBalance(customer);
                         break;
                     case 2:
                         //logic to select products
@@ -116,6 +124,11 @@ namespace Capstone.Classes
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+
         public void DisplayItems(List<CateringItem> input)
         {
             for (int i = 0; i < input.Count; i++)
@@ -124,6 +137,46 @@ namespace Capstone.Classes
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        public void AddToBalance(Customer input)
+        {
+            int toAdd = 0;
+            bool validInput = false;
+
+            while (!validInput)
+            {
+                Console.WriteLine("Please enter a positive amount to add: ");
+                try
+                {
+                    toAdd = int.Parse(Console.ReadLine());
+
+                    if (toAdd < 0)
+                    {
+                        throw new IndexOutOfRangeException("toAdd");
+                    }
+                    if(input.CurrentAccountBalance + toAdd > 5000)
+                    {
+                        throw new IndexOutOfRangeException("toAdd");
+                    }
+                    validInput = true;
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine("Invalid input. Please enter a whole dollar amount.");
+                }
+                catch(IndexOutOfRangeException ex)
+                {
+                    Console.WriteLine("Total balance cannot be less than 0 or greater than 5000.");
+                }
+            }
+
+            input.ChangeBalance(toAdd);
+
+        }
 
     }
 }
