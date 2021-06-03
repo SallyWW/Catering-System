@@ -24,5 +24,26 @@ namespace Capstone.Classes
             this.Price = price;
             this.Type = type;
         }
+        public override string ToString()
+        {
+            string fullType = "";
+            if (Type == "B")
+            {
+                fullType = "beverage";
+            }
+            else if (Type == "E")
+            {
+                fullType = "entree";
+            }
+            else if (Type == "A")
+            {
+                fullType = "appetizer";
+            }
+            else if (Type == "D")
+            {
+                fullType = "dessert";
+            }
+            return fullType + "\t" + Name + "\t" + Price + "\t" + inventory;
+        }
     }
 }
