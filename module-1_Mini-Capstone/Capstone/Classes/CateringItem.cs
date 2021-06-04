@@ -42,6 +42,15 @@ namespace Capstone.Classes
             this.Type = type;
         }
 
+        public CateringItem(string code, string name, double price, string type, int inventory)
+        {
+            this.Code = code;
+            this.Name = name;
+            this.Price = price;
+            this.Type = type;
+            this.Inventory = inventory;
+        }
+
         public void RemoveInventory(int itemsToRemove)
         {
             Inventory -= itemsToRemove;

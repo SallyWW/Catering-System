@@ -8,7 +8,7 @@ namespace Capstone.Classes
     {
         public double CurrentAccountBalance { get; private set; } = 0;
 
-        private List<CateringItem> pastPurchase = new List<CateringItem>();
+        private List<CateringItem> purchases = new List<CateringItem>();
 
         /// <summary>
         /// Takes a positive int less than 5000 and adds it to the current balance
@@ -19,6 +19,17 @@ namespace Capstone.Classes
 
             CurrentAccountBalance += input;
         }
+
+        public void removeBalance(double input )
+        {
+            CurrentAccountBalance -= input;
+        }
+
+        public void AddToPurchases(CateringItem itemBought)
+        {
+            purchases.Add(itemBought);
+        }
+
 
     }
 }
