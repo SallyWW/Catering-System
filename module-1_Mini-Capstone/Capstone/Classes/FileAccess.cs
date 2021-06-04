@@ -25,16 +25,16 @@ namespace Capstone.Classes
         // private Directory fullFile = 
 
 
-       public void ReadInMenuFile()
+        public void ReadInMenuFile()
         {
             string temp = "";
             string[] objectInfo = new string[4];
 
             try
             {
-                using(StreamReader reader = new StreamReader(filePath))
+                using (StreamReader reader = new StreamReader(filePath))
                 {
-                    while(!reader.EndOfStream)
+                    while (!reader.EndOfStream)
                     {
                         temp = reader.ReadLine();
                         objectInfo = temp.Split("|");
@@ -43,12 +43,34 @@ namespace Capstone.Classes
                     }
                 }
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
                 Console.WriteLine("File not found: " + ex.Message);
             }
+        }
 
+        public void LogLedger(List<TransactionLog> customerTransactions)
+        {
+            try
+            {
+                string directory = Environment.CurrentDirectory;
+                string filename = @"C:\Catering\Log.txt";
+                string fullPath = Path.Combine(directory, filename);
 
+                using (StreamWriter dataOutput = new StreamWriter(filename, false))
+                {
+                    foreach (TransactionLog transactions in customerTransactions)
+                    {
+                        string temp = string.Format("{0, -22} {1, -30} {2, -10} {3, -10}", 
+                            transactions.TransactionDateTime, transactions.TransactionName, transactions.TransactionAmount.ToString("C"), transactions.TotalRemainingAmount.ToString("C"));
+                        dataOutput.WriteLine(temp);
+                    }
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine("Can not open the file for writing.");
+            }
         }
     }
 }

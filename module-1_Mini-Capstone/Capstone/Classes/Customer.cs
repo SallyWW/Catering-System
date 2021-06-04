@@ -9,7 +9,7 @@ namespace Capstone.Classes
         public double CurrentAccountBalance { get; private set; } = 0;
 
         private List<CateringItem> purchases = new List<CateringItem>();
-
+        private List<TransactionLog> transactions = new List<TransactionLog>();
 
         private Dictionary<string, int> wallet = new Dictionary<string, int>() {
             {"twenty", 0 },
@@ -21,6 +21,10 @@ namespace Capstone.Classes
             {"nickel", 0 }
         };
 
+        public List<TransactionLog> GetTransactions()
+        {
+            return transactions;
+        }
 
         /// <summary>
         /// Takes a positive int less than 5000 and adds it to the current balance
@@ -89,7 +93,10 @@ namespace Capstone.Classes
             }
         }
 
-
+        public void AddTransaction(TransactionLog currentTransaction)
+        {
+            transactions.Add(currentTransaction);
+        }
     }
 
 }

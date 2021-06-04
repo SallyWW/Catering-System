@@ -53,6 +53,7 @@ namespace Capstone.Classes
                         break;
                     case 3:
                         //set escape condition to true
+                        menuInitialization.LogLedger(customer.GetTransactions());
                         done = true;
                         break;
                 }
@@ -108,7 +109,7 @@ namespace Capstone.Classes
                 Console.WriteLine("(2) Select Products");
                 Console.WriteLine("(3) Complete Transaction");
                 //will display balance RETURN TO THIS
-                Console.WriteLine("Current Account Balance : " + customer.CurrentAccountBalance);
+                Console.WriteLine("Current Account Balance : " + customer.CurrentAccountBalance.ToString("C"));
                 menuSelection = MenuSelection();
                 Console.WriteLine();
 
@@ -187,9 +188,9 @@ namespace Capstone.Classes
                     Console.WriteLine();
                 }
             }
-
             customer.ChangeBalance(toAdd);
-
+            TransactionLog currentTransaction = new TransactionLog("ADD MONEY", toAdd, customer.CurrentAccountBalance, DateTime.Now);
+            customer.AddTransaction(currentTransaction);
         }
 
         /// <summary>
@@ -280,8 +281,10 @@ namespace Capstone.Classes
                 customer.AddToPurchases(customerPurchase);
                 customer.removeBalance(amountToBuy * selectedItem.Price);
 
+                string transactionName = customerPurchase.Inventory + "  " + customerPurchase.Name + "  " + customerPurchase.Code;
+                TransactionLog currentTransaction = new TransactionLog(transactionName, customerPurchase.TotalAmount, customer.CurrentAccountBalance, DateTime.Now);
+                customer.AddTransaction(currentTransaction);
             }
-
         }
 
         private bool CustomerCanAfford(CateringItem currentItem, int amountToBuy)
@@ -298,6 +301,7 @@ namespace Capstone.Classes
 
         private void PrintCurrentCart()
         {
+            double balance = customer.CurrentAccountBalance;
             string temp = "";
             double runningTotal = 0;
             foreach (CateringItem item in customer.GetPurchases())
@@ -313,6 +317,9 @@ namespace Capstone.Classes
             Console.WriteLine();
             customer.ChangeReturned();
             //customer.PrintWallet();
+
+            TransactionLog currentTransaction = new TransactionLog("GIVE CHANGE", balance, customer.CurrentAccountBalance, DateTime.Now);
+            customer.AddTransaction(currentTransaction);
         }
 
 
