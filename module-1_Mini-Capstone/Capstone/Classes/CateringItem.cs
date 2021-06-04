@@ -33,6 +33,11 @@ namespace Capstone.Classes
             }
         }
 
+        public double TotalAmount { get
+            {
+                return Inventory * Price;
+            } }
+
 
         public CateringItem(string code, string name, double price, string type)
         {
@@ -71,11 +76,11 @@ namespace Capstone.Classes
                 isSoldOut = Inventory.ToString();
             }
 
+            return String.Format(" {0, -5} {1, -10} {2, -25} {3, -10} {4, -10}", Code, fullType, Name, Price.ToString("C"), isSoldOut);
 
-            return fullType + "\t" + Name + "\t" + Price + "\t" + isSoldOut;
         }
 
-        private string FullType()
+        public string FullType()
         {
             string fullType = "";
 

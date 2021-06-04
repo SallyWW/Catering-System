@@ -39,6 +39,7 @@ namespace Capstone.Classes
                 Console.WriteLine("(2) Order");
                 Console.WriteLine("(3) Quit");
                 menuSelection = MenuSelection();
+                Console.WriteLine();
 
                 switch (menuSelection)
                 {
@@ -108,8 +109,9 @@ namespace Capstone.Classes
                 Console.WriteLine("(3) Complete Transaction");
                 //will display balance RETURN TO THIS
                 Console.WriteLine("Current Account Balance : " + customer.CurrentAccountBalance);
-
                 menuSelection = MenuSelection();
+                Console.WriteLine();
+
                 switch (menuSelection)
                 {
                     case 1:
@@ -122,6 +124,7 @@ namespace Capstone.Classes
                         break;
                     case 3:
                         //set escape condition to true
+                        PrintCurrentCart();
                         done = true;
                         break;
                 }
@@ -142,6 +145,7 @@ namespace Capstone.Classes
             {
                 Console.WriteLine(input[i].ToString());
             }
+            Console.WriteLine();
         }
 
 
@@ -175,10 +179,12 @@ namespace Capstone.Classes
                 catch (FormatException ex)
                 {
                     Console.WriteLine("Invalid input. Please enter a whole dollar amount.");
+                    Console.WriteLine();
                 }
                 catch (IndexOutOfRangeException ex)
                 {
                     Console.WriteLine("Total balance cannot be less than 0 or greater than 5000.");
+                    Console.WriteLine();
                 }
             }
 
@@ -284,11 +290,30 @@ namespace Capstone.Classes
             if (customer.CurrentAccountBalance < (currentItem.Price * amountToBuy))
             {
                 Console.WriteLine("Not enough money...");
+                Console.WriteLine();
                 return canAfford;
             }
             return true;
         }
 
+        private void PrintCurrentCart()
+        {
+            string temp = "";
+            double runningTotal = 0;
+            foreach (CateringItem item in customer.GetPurchases())
+            {
+                runningTotal += item.TotalAmount;
+
+                temp = String.Format("{0, -5} {1, -10} {2, -25} {3, -10} {4, -10}",
+                   item.Inventory, item.FullType(), item.Name, item.Price.ToString("C"), item.TotalAmount.ToString("C"));
+                Console.WriteLine(temp);
+            }
+            Console.WriteLine();
+            Console.WriteLine("Total: " + runningTotal.ToString("C"));
+            Console.WriteLine();
+            customer.ChangeReturned();
+            //customer.PrintWallet();
+        }
 
 
 
