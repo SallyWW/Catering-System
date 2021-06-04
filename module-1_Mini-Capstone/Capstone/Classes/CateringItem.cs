@@ -16,7 +16,24 @@ namespace Capstone.Classes
         public string Name { get; private set; }
         public double Price { get; private set; }
         public string Type { get; private set; }
-        public int inventory { get; private set; } = 50;
+        public int Inventory { get; private set; } = 50;
+
+        public bool IsSoldOut
+        {
+            get
+            {
+                if (Inventory <= 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+
         public CateringItem(string code, string name, double price, string type)
         {
             this.Code = code;
@@ -25,10 +42,34 @@ namespace Capstone.Classes
             this.Type = type;
         }
 
+        public void RemoveInventory(int itemsToRemove)
+        {
+            Inventory -= itemsToRemove;
+        }
+
         public override string ToString()
         {
             string isSoldOut = "";
+            string fullType = FullType();
+
+
+            if (IsSoldOut == true)
+            {
+                isSoldOut = "SOLD OUT" ;
+            }
+            else
+            {
+                isSoldOut = Inventory.ToString();
+            }
+
+
+            return fullType + "\t" + Name + "\t" + Price + "\t" + isSoldOut;
+        }
+
+        private string FullType()
+        {
             string fullType = "";
+
             if (Type == "B")
             {
                 fullType = "beverage";
@@ -46,15 +87,11 @@ namespace Capstone.Classes
                 fullType = "dessert";
             }
 
-            if(inventory == 0)
-            {
-                isSoldOut = "SOLD OUT";
-            }
-            else
-            {
-                isSoldOut = inventory.ToString();
-            }
-            return fullType + "\t" + Name + "\t" + Price + "\t" + isSoldOut;
+            return fullType;
         }
+
+        
+           
+
     }
 }

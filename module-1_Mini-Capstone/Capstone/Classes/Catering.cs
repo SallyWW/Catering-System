@@ -38,5 +38,30 @@ namespace Capstone.Classes
             }
             return false;
         }
+
+        public CateringItem GetItemFromList(string userCode)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].Code == userCode)
+                {
+                    return items[i];
+                }
+            }
+            return null;
+        }
+
+        public string CheckInventory(string userCode)
+        {
+            for(int i = 0; i <  items.Count; i++)
+            {
+                if(items[i].Code == userCode)
+                {
+                    return items[i].Inventory.ToString();
+                }
+            }
+
+            return "Item Does Not Exist"; //should never see this
+        }
     }
 }

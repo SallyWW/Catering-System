@@ -13,7 +13,7 @@ namespace CapstoneTests
         public void AccountBalanceReturnsZero()
         {
             //Arrange
-            Customer subject = new Customer("Bob");
+            Customer subject = new Customer();
 
             //Act
             double accoutBalanceResult = subject.CurrentAccountBalance;

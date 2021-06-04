@@ -27,7 +27,7 @@ namespace Capstone.Classes
             menuInitialization.ReadInMenuFile();
             catering = menuInitialization.getCatering();
 
-            Customer customer = new Customer("Bob");
+            Customer customer = new Customer();
 
             while (!done)
             {
@@ -181,9 +181,19 @@ namespace Capstone.Classes
 
         private void ProductSelection(Customer customer)
         {
+
             string userInput = "";
             bool isFound = false;
+            ItemOnMenu(ref userInput, ref isFound);
+            CateringItem currentSelection = catering.GetItemFromList(userInput);
 
+
+
+
+        }
+
+        private void ItemOnMenu(ref string userInput, ref bool isFound)
+        {
             while (!isFound)
             {
                 Console.WriteLine("Please enter a product code for purchase: ");
@@ -195,7 +205,25 @@ namespace Capstone.Classes
                 {
                     Console.WriteLine("Item does not exist.");
                 }
+                
             }
         }
+
+        private void BuyItem(int amountToBuy, CateringItem selectedItem)
+        {
+            if(amountToBuy > selectedItem.Inventory)
+            {
+                Console.WriteLine("Insufficient Stock");
+            }
+            else
+            {
+                selectedItem.RemoveInventory(amountToBuy);
+            }
+        }
+
+
+
+
+
     }
 }
