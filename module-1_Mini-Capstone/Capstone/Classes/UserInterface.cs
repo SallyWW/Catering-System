@@ -48,7 +48,7 @@ namespace Capstone.Classes
                         DisplayItems(catering.getItems());
                         break;
                     case 2:
-                        // logic for oplacing an order
+                        // logic for placing an order
                         OrderInterface();
                         break;
                     case 3:
@@ -204,12 +204,9 @@ namespace Capstone.Classes
             bool isFound = false;
             ItemOnMenu(ref userInput, ref isFound);
             CateringItem currentSelection = catering.GetItemFromList(userInput);
-            int amountToBuy = AmountToBuy(currentSelection);///
+            int amountToBuy = AmountToBuy(currentSelection);
 
             BuyItem(amountToBuy, currentSelection);
-
-
-
         }
 
         private int AmountToBuy(CateringItem currentItem)

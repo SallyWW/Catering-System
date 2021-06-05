@@ -26,7 +26,7 @@ namespace CapstoneTests
         public void ChangeBalanceReturns200()
         {
             //Arrange
-            Customer subject = new Customer("Bob");
+            Customer subject = new Customer();
 
             //Act
             subject.ChangeBalance(200);
